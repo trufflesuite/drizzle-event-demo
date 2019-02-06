@@ -60,6 +60,29 @@ Guide for using an existing Redux Store](https://truffleframework.com/docs/drizz
 $ app npm install redux react-redux
 ```
 
+2. Hook up the Provider
+
+```js
+
+// Grab the store from our TBD, poorly named module
+//
+import composedStore from './reducers'
+
+class App extends Component {
+  render() {
+    // pass the composed store to DrizzleProvider
+    return (
+      <DrizzleProvider store={composedStore} options={drizzleOptions}>
+        <LoadingContainer>
+          <MyContainer />
+        </LoadingContainer>
+      </DrizzleProvider>
+    );
+  }
+}
+```
+
+
 2. Lets put these changes in ./reducers/index.js file
 ```js
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
@@ -125,4 +148,5 @@ const makeLocalStore = options => {
 
 export default makeLocalStore(drizzleOptions)
 ```
+
 
