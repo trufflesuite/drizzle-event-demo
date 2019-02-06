@@ -2,6 +2,10 @@ Events with drizzle
 ===================
 
 Lets create a front end app that can listen to contract events.
+[Here's what the finished app looks like](https://youtu.be/jGIY_l8oWTQ)
+
+Note: This is an investigation, and will likely lead to changes in Drizzle's API
+to make this process more dev friendly.
 
 Leverage an existing box
 ------------------------
@@ -149,4 +153,45 @@ const makeLocalStore = options => {
 export default makeLocalStore(drizzleOptions)
 ```
 
+Connect a component
+-------------------
 
+Lets use [react-toaster]() to alert the user whenever a SimpleStorage contract event is emitted. We have to declare a <ToastContainer /> component and invoke `toast.success()` when an event is detected. We'll touch `MyComponent` and the event reducer respectively.
+
+1. Add react-toastify to project.
+```bash
+$ npm install react-toastify
+```
+
+2. MyComponent: import ToastContainer and its css
+
+```js
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+// edited out for clarity
+
+  <div className="App">
+    <ToastContainer />
+    <div>
+      <img src={logo} alt="drizzle-logo" />
+      <h1>Drizzle Examples</h1>
+      <p>Examples of how to get started with Drizzle in various situations.</p>
+    </div>
+
+```
+
+
+3. Reducer: invoke toast.success when event is processed.
+```js
+const events = (state = {}, action) => {
+  if (action.type === EVENT_FIRED) {
+    console.log('local App Reducer: ', action)
+    const contract = action.name
+    const message = action.event.returnValues._message
+    const display = `${contract}: ${message}`
+    toast.success(display, { position: toast.POSITION.TOP_RIGHT })
+  }
+  return state
+}
+```

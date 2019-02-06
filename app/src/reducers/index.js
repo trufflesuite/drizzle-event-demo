@@ -8,6 +8,8 @@ import {
 } from 'drizzle'
 import drizzleOptions from '../drizzleOptions'
 
+import { toast } from 'react-toastify'
+
 // this should be importable from drizzle
 // or exposed from drizzle-react
 //
@@ -16,6 +18,10 @@ const EVENT_FIRED = 'EVENT_FIRED'
 const events = (state = {}, action) => {
   if (action.type === EVENT_FIRED) {
     console.log('local App Reducer: ', action)
+    const contract = action.name
+    const message = action.event.returnValues._message
+    const display = `${contract}: ${message}`
+    toast.success(display, { position: toast.POSITION.TOP_RIGHT })
   }
   return state
 }

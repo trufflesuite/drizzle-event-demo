@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   AccountData,
   ContractData,
@@ -9,6 +11,7 @@ import logo from "./logo.png";
 
 export default ({ accounts }) => (
   <div className="App">
+    <ToastContainer />
     <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Examples</h1>
