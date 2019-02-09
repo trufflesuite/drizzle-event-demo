@@ -33,7 +33,7 @@ Commands:
 
 
 ```bash
-$ event-demo truffle compile
+$ truffle compile
 
 Compiling ./contracts/ComplexStorage.sol...
 Compiling ./contracts/Migrations.sol...
@@ -61,7 +61,7 @@ Guide for using an existing Redux Store](https://truffleframework.com/docs/drizz
 1. Add react-redux to project
 
 ```bash
-$ app npm install redux react-redux
+$ npm install redux react-redux
 ```
 
 2. Hook up the Provider
