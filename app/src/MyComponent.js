@@ -14,11 +14,11 @@ export default ({ accounts, chuckNorrisLore }) => (
     <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Event Example</h1>
-      <p>Connecting and reacting to Solidity Contract events</p>
+      <p>Connect and react to Solidity Contract events by hooking into Drizzle Redux state</p>
     </div>
 
     <div className="section">
-      <h2>dispatch an web request</h2>
+      <h2>Dispatch a web request</h2>
       <button onClick={() => chuckNorrisLore() }>Chuck Norris Lore!</button>
     </div>
 
