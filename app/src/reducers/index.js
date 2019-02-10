@@ -1,22 +1,9 @@
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-import { all, fork } from 'redux-saga/effects'
-import {
-  drizzleReducers,
-  drizzleSagas,
-  generateContractsInitialState
-} from 'drizzle'
+import { toast } from 'react-toastify'
+import { generateStore, EventActions } from 'drizzle'
 import drizzleOptions from '../drizzleOptions'
 
-import { toast } from 'react-toastify'
-
-// this should be importable from drizzle
-// or exposed from drizzle-react
-//
-const EVENT_FIRED = 'EVENT_FIRED'
-
 const events = (state = {}, action) => {
-  if (action.type === EVENT_FIRED) {
+  if (action.type === EventActions.EVENT_FIRED) {
     console.log('local App Reducer: ', action)
     const contract = action.name
     const message = action.event.returnValues._message
@@ -26,38 +13,52 @@ const events = (state = {}, action) => {
   return state
 }
 
-const rootReducer = combineReducers({
-  events,
-  ...drizzleReducers
-})
-
-function* rootSaga() {
-  yield all(drizzleSagas.map(fork))
-}
-
-const makeLocalStore = options => {
-  // Redux DevTools
-  const composeEnhancers =
-    global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-  // Preloaded state
-  var preloadedState = {
-    contracts: generateContractsInitialState(options)
+const joke = (state = {}, action) => {
+  if (action.type === 'JOKE') {
+    toast.success(action.joke, {position: toast.POSITION.TOP_LEFT})
+    return action.joke
   }
-
-  // create the saga middleware
-  const sagaMiddleware = createSagaMiddleware()
-
-  const store = createStore(
-    rootReducer,
-    preloadedState,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
-  )
-
-  console.log('drizzleSagas', rootSaga)
-
-  sagaMiddleware.run(rootSaga)
-  return store
+  return state
 }
 
-export default makeLocalStore(drizzleOptions)
+/* Generate the redux store by combining drizzleOptions, application reducers,
+ * middleware and initial app state.
+ *
+ * @param {object} config - The configuration object
+ * @param {object} config.drizzleOptions - drizzle configuration object
+ * @param {object} [config.reducers={}] - application level reducers to include in store
+ * @param {object[]} [config.appSagas=[]] - application saga middlewares to include in store
+ * @param {object[]} [config.appMiddlewares=[]] - application middlewares to include in store
+ * @param {object} [config.initialAppState={}] - application store tree initial value
+ * @param {boolean} [config.disableReduxDevTools=false] - disable redux devtools hook
+ * @returns {object} Redux store
+ */
+
+export const fetchJoke = async dispatch => {
+  const resp = await fetch('http://api.icndb.com/jokes/random')
+  const json = await resp.json()
+  const {joke} = json.value
+  console.log('joke payload', joke)
+  dispatch({type: 'JOKE', joke})
+}
+
+// Register app reducers to be incorporated into drizzle's redux store.
+const appReducers = { events, joke }
+
+// Don't forget to set your state
+const initialAppState = { events: {}, joke: {} }
+
+// declare your app has Sagas to be registered
+const appSagas = []
+
+// declare app middleware to be included
+const appMiddlewares = []
+
+export default generateStore({
+  drizzleOptions,
+  appReducers,
+  appSagas,
+  initialAppState,
+  appMiddlewares,
+  disableReduxDevTools: false
+})

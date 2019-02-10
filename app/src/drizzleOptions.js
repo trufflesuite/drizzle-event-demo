@@ -15,6 +15,7 @@ const options = {
     SimpleStorage: ["StorageSet"],
   },
   polls: {
+    // set polling interval to 30secs so we don't get buried in poll events
     accounts: 30000,
   },
 };

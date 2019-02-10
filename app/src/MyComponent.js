@@ -9,7 +9,7 @@ import {
 
 import logo from "./logo.png";
 
-export default ({ accounts }) => (
+export default ({ accounts, chuckNorrisLore }) => (
   <div className="App">
     <ToastContainer />
     <div>
@@ -18,6 +18,9 @@ export default ({ accounts }) => (
       <p>Examples of how to get started with Drizzle in various situations.</p>
     </div>
 
+    <div className="section">
+      <button onClick={() => chuckNorrisLore() }>Chuck Norris Lore!</button>
+    </div>
     <div className="section">
       <h2>Active Account</h2>
       <AccountData accountIndex="0" units="ether" precision="3" />
