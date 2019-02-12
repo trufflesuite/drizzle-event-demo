@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  chuckNorrisLore: () => fetchJoke(dispatch)
+  chuckNorrisLore: () => fetchJoke(dispatch),
+  dadJokeLore: () => dispatch({type: 'LOOKUP_JOKE'})
 })
 
 const MyContainer = drizzleConnect(

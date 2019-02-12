@@ -8,7 +8,7 @@ import {
 
 import logo from "./logo.png";
 
-export default ({ accounts, chuckNorrisLore }) => (
+export default ({ accounts, chuckNorrisLore, dadJokeLore }) => (
   <div className="App">
     <ToastContainer />
     <div>
@@ -20,6 +20,7 @@ export default ({ accounts, chuckNorrisLore }) => (
     <div className="section">
       <h2>Dispatch a web request</h2>
       <button onClick={() => chuckNorrisLore() }>Chuck Norris Lore!</button>
+      <button onClick={() => dadJokeLore() }>DadJoke Lore!</button>
     </div>
 
     <div className="section">
