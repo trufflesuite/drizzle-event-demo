@@ -8,7 +8,7 @@ import {
 
 import logo from "./logo.png";
 
-export default ({ accounts, chuckNorrisLore, dadJokeLore }) => (
+export default ({ chuckNorrisLore, dadJokeLore }) => (
   <div className="App">
     <ToastContainer />
     <div>

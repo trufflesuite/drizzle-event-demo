@@ -95,7 +95,7 @@ const appMiddlewares = []
  * @param {boolean} [config.disableReduxDevTools=false] - disable redux devtools hook
  * @returns {object} Redux store
  */
-export default generateStore({
+const store = generateStore({
   drizzleOptions,
   appReducers,
   appSagas,
@@ -103,3 +103,6 @@ export default generateStore({
   appMiddlewares,
   disableReduxDevTools: false  // enable ReduxDevTools!
 })
+
+// Use the store with DrizzleProvider
+export default store
