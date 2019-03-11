@@ -7,10 +7,12 @@ import { put, takeEvery } from 'redux-saga/effects'
 //
 const eventsReducer = (state = {}, action) => {
   if (action.type === EventActions.EVENT_FIRED) {
-    console.log('local App Reducer: ', action)
     const contract = action.name
+    const contractEvent = action.event.event
     const message = action.event.returnValues._message
-    const display = `${contract}: ${message}`
+    const display = `${contract}(${contractEvent}): ${message}`
+    console.log('local App Reducer payload:', action)
+    console.log('Contract event from redux', display)
     toast.success(display, { position: toast.POSITION.TOP_RIGHT })
   }
   return state
@@ -31,9 +33,9 @@ const jokeReducer = (state = {}, action) => {
 // Another App reducer example
 // Update the state and console log the information
 //
-const dadJokeReducer = (state = {}, action) => {
-  if (action.type === 'DADJOKE') {
-    console.log('DAD action', action)
+const todoReducer = (state = {}, action) => {
+  if (action.type === 'TODO') {
+    console.log('TODO action', action)
     return action.joke
   }
   return state
@@ -43,6 +45,7 @@ const dadJokeReducer = (state = {}, action) => {
 // Retrieve and dispatch a random chuck norris joke
 //
 export const fetchJoke = async dispatch => {
+  console.log('Dispatching Chuck Norris joke ... They resolve when Chuck is good and ready.')
   const resp = await fetch('http://api.icndb.com/jokes/random')
   const json = await resp.json()
   const { joke } = json.value
@@ -52,28 +55,29 @@ export const fetchJoke = async dispatch => {
 // Generator function to retrieve a joke
 // Retrieve a joke, and dispatch it to store
 //
-function * fetchDadJoke() {
+function * fetchTodo() {
+  // Pretend this endpoint had some nice content.
   const joke = yield fetch('https://jsonplaceholder.typicode.com/todos/1')
     .then(response => response.json())
     .then(json => json)
-  yield put({ type: 'DADJOKE', joke })
+  yield put({ type: 'TODO', joke })
 }
 
 // Example App saga
 //
 function* appSaga() {
-  yield takeEvery('LOOKUP_JOKE', fetchDadJoke)
+  yield takeEvery('LOOKUP_TODO', fetchTodo)
 }
 
 // Register app reducers to be incorporated into drizzle's redux store.
 const appReducers = {
   events: eventsReducer,
   joke: jokeReducer,
-  dadJoke: dadJokeReducer
+  todo: todoReducer
 }
 
 // Set initial app state
-const initialAppState = { events: {}, joke: {}, dadJoke: {} }
+const initialAppState = { events: {}, joke: {}, todo: {} }
 
 // Declare your app has Sagas to be registered
 const appSagas = [appSaga]

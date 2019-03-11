@@ -8,7 +8,7 @@ import {
 
 import logo from "./logo.png";
 
-export default ({ chuckNorrisLore, dadJokeLore }) => (
+export default ({ chuckNorrisLore, fetchTodo }) => (
   <div className="App">
     <ToastContainer />
     <div>
@@ -20,7 +20,7 @@ export default ({ chuckNorrisLore, dadJokeLore }) => (
     <div className="section">
       <h2>Dispatch a web request</h2>
       <button onClick={() => chuckNorrisLore() }>Chuck Norris Lore!</button>
-      <button onClick={() => dadJokeLore() }>DadJoke Lore!</button>
+      <button onClick={() => fetchTodo() }>Get Todo!</button>
     </div>
 
     <div className="section">
