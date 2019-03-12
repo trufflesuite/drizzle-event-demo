@@ -76,9 +76,6 @@ const appReducers = {
   todo: todoReducer
 }
 
-// Set initial app state
-const initialAppState = { events: {}, joke: {}, todo: {} }
-
 // Declare your app has Sagas to be registered
 const appSagas = [appSaga]
 
@@ -94,8 +91,6 @@ const appMiddlewares = []
  * @param {object} config.drizzleOptions - drizzle configuration object
  * @param {object} [config.reducers={}] - application level reducers to include in store
  * @param {object[]} [config.appSagas=[]] - application saga middlewares to include in store
- * @param {object[]} [config.appMiddlewares=[]] - application middlewares to include in store
- * @param {object} [config.initialAppState={}] - application store tree initial value
  * @param {boolean} [config.disableReduxDevTools=false] - disable redux devtools hook
  * @returns {object} Redux store
  */
@@ -103,10 +98,10 @@ const store = generateStore({
   drizzleOptions,
   appReducers,
   appSagas,
-  initialAppState,
   appMiddlewares,
   disableReduxDevTools: false  // enable ReduxDevTools!
 })
+console.log('store', JSON.stringify(store.getState(), null, 2))
 
 // Use the store with DrizzleProvider
 export default store
