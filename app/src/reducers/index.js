@@ -79,10 +79,6 @@ const appReducers = {
 // Declare your app has Sagas to be registered
 const appSagas = [appSaga]
 
-// Declare app middleware to be included
-// Todo: Try adding redux-thunk (a simple middleware)
-//       and any a few others
-const appMiddlewares = []
 
 /* Generate the redux store by combining drizzleOptions, application reducers,
  * middleware and initial app state.
@@ -98,7 +94,6 @@ const store = generateStore({
   drizzleOptions,
   appReducers,
   appSagas,
-  appMiddlewares,
   disableReduxDevTools: false  // enable ReduxDevTools!
 })
 console.log('store', JSON.stringify(store.getState(), null, 2))
