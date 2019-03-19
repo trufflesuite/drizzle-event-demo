@@ -30,7 +30,17 @@ export default ({ chuckNorrisLore, fetchTodo }) => (
         <strong>Stored Value: </strong>
         <ContractData contract="SimpleStorage" method="storedData" />
       </p>
-      <ContractForm contract="SimpleStorage" method="set" />
+     <ContractForm contract="SimpleStorage" method="set" />
+    </div>
+
+    <div className="section">
+      <h2>Pay for Update</h2>
+     <ContractForm contract="SimpleStorage" method="payForUpdate" sendArgs={{value: 1e18}} />
+    </div>
+
+    <div className="section">
+      <h2>Will revert unless secret Code!</h2>
+     <ContractForm contract="SimpleStorage" method="setAlwaysReverts" sendArgs={{value: 1e18}} />
     </div>
   </div>
 );
