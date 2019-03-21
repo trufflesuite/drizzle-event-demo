@@ -59,7 +59,6 @@ function * fetchTodo() {
   // Pretend this endpoint had some nice content.
   const joke = yield fetch('https://jsonplaceholder.typicode.com/todos/1')
     .then(response => response.json())
-    .then(json => json)
   yield put({ type: 'TODO', joke })
 }
 
