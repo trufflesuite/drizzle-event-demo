@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  chuckNorrisLore: () => fetchJoke(dispatch),
+  fetchJoke: () => fetchJoke(dispatch),
   fetchTodo: () => dispatch({type: 'LOOKUP_TODO'})
 })
 

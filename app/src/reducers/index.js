@@ -36,7 +36,8 @@ const jokeReducer = (state = {}, action) => {
 const todoReducer = (state = {}, action) => {
   if (action.type === 'TODO') {
     console.log('TODO action', action)
-    return action.joke
+    toast.success(action.todo.title, { position: toast.POSITION.TOP_CENTER })
+    return action.todo
   }
   return state
 }
@@ -57,9 +58,12 @@ export const fetchJoke = async dispatch => {
 //
 function * fetchTodo() {
   // Pretend this endpoint had some nice content.
-  const joke = yield fetch('https://jsonplaceholder.typicode.com/todos/1')
+  const tid = Math.floor(Math.random() * 19 + 1)
+  const url = `https://jsonplaceholder.typicode.com/todos/${tid}`
+
+  const todo = yield fetch(url)
     .then(response => response.json())
-  yield put({ type: 'TODO', joke })
+  yield put({ type: 'TODO', todo })
 }
 
 // Example App saga
@@ -84,9 +88,9 @@ const appSagas = [appSaga]
  *
  * @param {object} config - The configuration object
  * @param {object} config.drizzleOptions - drizzle configuration object
- * @param {object} [config.reducers={}] - application level reducers to include in store
- * @param {object[]} [config.appSagas=[]] - application saga middlewares to include in store
- * @param {boolean} [config.disableReduxDevTools=false] - disable redux devtools hook
+ * @param {object} config.reducers={} - application level reducers to include in store
+ * @param {object[]} config.appSagas=[] - application saga to include in store
+ * @param {boolean} config.disableReduxDevTools=false - disable redux devtools hook
  * @returns {object} Redux store
  */
 const store = generateStore({
