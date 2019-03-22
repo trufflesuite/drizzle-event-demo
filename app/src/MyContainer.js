@@ -1,6 +1,5 @@
 import MyComponent from './MyComponent'
 import { drizzleConnect } from 'drizzle-react'
-import { fetchJoke } from './reducers'
 
 const mapStateToProps = state => ({
   accounts: state.accounts,
@@ -9,15 +8,9 @@ const mapStateToProps = state => ({
   drizzleStatus: state.drizzleStatus
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchJoke: () => fetchJoke(dispatch),
-  fetchTodo: () => dispatch({type: 'LOOKUP_TODO'})
-})
-
 const MyContainer = drizzleConnect(
   MyComponent,
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )
 
 export default MyContainer

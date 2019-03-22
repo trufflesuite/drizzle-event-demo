@@ -8,19 +8,13 @@ import {
 
 import logo from "./logo.png";
 
-export default ({ fetchJoke, fetchTodo }) => (
+export default () => (
   <div className="App">
     <ToastContainer />
     <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Event Example</h1>
       <p>Connect and react to Solidity Contract events by hooking into Drizzle Redux state</p>
-    </div>
-
-    <div className="section">
-      <h2>Dispatch a web request</h2>
-      <button onClick={() => fetchJoke() }>Chuck Norris Lore!</button>
-      <button onClick={() => fetchTodo() }>Get Todo!</button>
     </div>
 
     <div className="section">
