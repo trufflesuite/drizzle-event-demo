@@ -11,6 +11,10 @@ const eventsReducer = (state = {}, action) => {
     const contractEvent = action.event.event
     const message = action.event.returnValues._message
     const display = `${contract}(${contractEvent}): ${message}`
+
+    // Side-effects in a reducer is an anti-pattern and is used here to
+    // show the contract event is available.
+    //
     console.log('local App Reducer payload:', action)
     console.log('Contract event from redux', display)
     toast.success(display, { position: toast.POSITION.TOP_RIGHT })
@@ -23,9 +27,11 @@ const eventsReducer = (state = {}, action) => {
 //
 const jokeReducer = (state = {}, action) => {
   if (action.type === 'JOKE') {
+    // Side-effects in a reducer is an anti-pattern and is used here to
+    // show the contract event is available.
+    //
     console.log('joke action', action)
     toast.success(action.joke, { position: toast.POSITION.TOP_LEFT })
-    return action.joke
   }
   return state
 }
@@ -35,9 +41,11 @@ const jokeReducer = (state = {}, action) => {
 //
 const todoReducer = (state = {}, action) => {
   if (action.type === 'TODO') {
+    // Side-effects in a reducer is an anti-pattern and is used here to
+    // show the contract event is available.
+    //
     console.log('TODO action', action)
     toast.success(action.todo.title, { position: toast.POSITION.TOP_CENTER })
-    return action.todo
   }
   return state
 }
