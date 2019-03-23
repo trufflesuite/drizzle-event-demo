@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 import { generateStore, EventActions } from 'drizzle'
 import drizzleOptions from '../drizzleOptions'
 
-const contractEventNotifier = _ => next => action => {
+const contractEventNotifier = store => next => action => {
   if (action.type === EventActions.EVENT_FIRED) {
     const contract = action.name
     const contractEvent = action.event.event
@@ -13,6 +13,7 @@ const contractEventNotifier = _ => next => action => {
   }
   return next(action)
 }
+
 
 const appMiddlewares = [ contractEventNotifier ]
 
