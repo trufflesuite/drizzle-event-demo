@@ -6,7 +6,7 @@ import "./App.css";
 
 import drizzleOptions from "./drizzleOptions";
 import MyContainer from "./MyContainer";
-import store from './reducers'
+import store from './middleware'
 
 class App extends Component {
   render() {
