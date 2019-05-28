@@ -8,9 +8,15 @@ import {
 
 import logo from "./logo.png";
 
-export default () => (
+import RegisterContractEvent from './RegisterContractEvent'
+
+export default (props) => {
+  // console.log('main props', props)
+
+  return (
   <div className="App">
     <ToastContainer />
+    <RegisterContractEvent {...props}/>
     <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Event Example</h1>
@@ -26,5 +32,16 @@ export default () => (
       </p>
       <ContractForm contract="SimpleStorage" method="set" />
     </div>
+    <hr />
+
+    <div className="section">
+      <h2>DimpleStorage with event</h2>
+      <p>
+        <strong>Stored Value: </strong>
+        <ContractData contract="DimpleStorage" method="storedData" />
+      </p>
+      <ContractForm contract="DimpleStorage" method="set" />
+    </div>
   </div>
-);
+)
+}

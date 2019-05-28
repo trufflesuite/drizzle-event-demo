@@ -1,6 +1,8 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract ComplexStorage {
+    event ComplexCreated(string _message);
+
     uint public storeduint1 = 15;
     uint public constant constuint = 16;
     uint128 public investmentsLimit = 17055;
@@ -24,6 +26,7 @@ contract ComplexStorage {
     }
 
     constructor() public {
+        emit ComplexCreated("Created a complex contrac");
         address address1 = 0xbCcc714d56bc0da0fd33d96d2a87b680dD6D0DF6;
         address address2 = 0xaee905FdD3ED851e48d22059575b9F4245A82B04;
 
