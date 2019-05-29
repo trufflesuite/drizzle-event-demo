@@ -1,6 +1,6 @@
 import Web3 from "web3";
-import SimpleStorage from './contracts/SimpleStorage.json'
-import DimpleStorage from './contracts/DimpleStorage.json'
+import SimpleStorage from '../app/src/contracts/SimpleStorage'
+import DimpleStorage from '../app/src/contracts/DimpleStorage'
 
 const ul = document.querySelector('#events')
 
