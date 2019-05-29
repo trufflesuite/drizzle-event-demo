@@ -13,28 +13,31 @@ const fallbackUrl = 'ws://127.0.0.1:9545'
 
 
 const getWeb3FromEthereum = async () => {
-  console.group("try resolving web3 from window.ethereum");
+  console.group("Is MetaMask injected?");
   const { ethereum } = window;
   if (!ethereum) {
-    console.log('no ethereum injected')
+    console.log('MetaMask Provider not detected')
+    console.groupEnd()
     return
   }
 
   let web3 = new Web3(ethereum);
   await ethereum.enable();
-  console.log('success!')
+  console.log('YES!')
   console.groupEnd()
   return web3
 
 }
 
 const getWeb3 = async() => {
+  console.group('Resolve web3 provider')
   let web3 = await getWeb3FromEthereum()
 
   if (!web3) {
     const provider = new Web3.providers.WebsocketProvider(fallbackUrl)
     web3 = new Web3(provider)
   }
+  console.groupEnd()
   return web3
 }
 
@@ -84,17 +87,23 @@ const registerEvents = (web3, networkId, accounts) => {
   const ssContract = loadWeb3Contract(web3, SimpleStorage, networkId, accounts)
   const dsContract = loadWeb3Contract(web3, DimpleStorage, networkId, accounts)
 
-  console.groupCollapsed('Loaded contracts from web3')
+  console.group('Load contracts from web3')
+  console.log('SimpleStorage retrieved by address')
+  console.log('DimpleStorage retrieved by address')
+
+  console.groupCollapsed('Contract details')
   console.log('SimpleStorage', ssContract)
   console.log('DimpleStorage', dsContract)
+  console.groupEnd()
+
   console.groupEnd()
 
   registerWeb3ContractEvent(ssContract, 'StorageSet')
   registerWeb3ContractEvent(dsContract, 'DimpleNumber2')
 
   console.group('register contract events')
-  console.log('SimpleStorage::StorageSet')
-  console.log('DimpleStorage::DimpleNumber2')
+  console.log('listen for SimpleStorage::StorageSet events')
+  console.log('listen for DimpleStorage::DimpleNumber2 events')
   console.groupEnd()
 
 }
@@ -103,7 +112,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const web3 = await getWeb3();
   const accounts = await getAccounts(web3)
 
-  console.log("web3 loaded", web3);
   registerEvents(web3, 5777, accounts)
 });
 

@@ -1,0 +1,18 @@
+{
+  "name": "test-case",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel serve index.html --open --host 192.168.1.209"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^1.12.3"
+  },
+  "dependencies": {
+    "web3": "^1.0.0-beta.55"
+  }
+}
