@@ -8,11 +8,12 @@ export default class RegisterContractEvent extends Component {
     const { web3Instance: web3 } = this.props.web3
     const { networkId } = this.props.web3
     const { accounts } = this.props
+
+    console.groupCollapsed('handleClick props')
     console.log('web3', web3)
     console.log('networkId', networkId)
     console.log('accounts', accounts[0])
-
-    const SimpleStorageAddress = '0x082bF3C35773fE84b1e19aA49d1eC59dd742a6C8'
+    console.groupEnd()
 
     const ssContract = new web3.eth.Contract(
       SimpleStorage.abi,
@@ -32,14 +33,16 @@ export default class RegisterContractEvent extends Component {
       }
     )
 
+    console.groupCollapsed('Loaded contracts from web3')
     console.log('ssContract', ssContract)
     console.log('dsContract', dsContract)
+    console.groupEnd()
 
 
     // register for simple storage
     ssContract.events.StorageSet({}, (error, event) => {
       if (!error) {
-        console.groupCollapsed('StorageSet Independent Event')
+        console.group('Independent Event: StorageSet')
         console.log('event', event)
         console.groupEnd()
       }
@@ -47,11 +50,13 @@ export default class RegisterContractEvent extends Component {
 
     dsContract.events.DimpleNumber2({}, (error, event) => {
       if (!error) {
-        console.groupCollapsed('DimpleSet Independent Event')
+        console.group('Independent Event: DimpleSet')
         console.log('event', event)
         console.groupEnd()
       }
     })
+
+    console.log('Independend events registered...')
   }
 
   render() {
