@@ -15,7 +15,7 @@ const options = {
   events: {
     // SimpleStorage: ["StorageSet"],
     // DimpleStorage: ["DimpleSet", "DimpleNumber2"],
-    DimpleStorage: ["DimpleSet"],
+    // DimpleStorage: ["DimpleSet"],
     // ComplexStorage: ["ComplexCreated"]
   },
   polls: {
