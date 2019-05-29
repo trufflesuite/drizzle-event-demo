@@ -8,15 +8,12 @@ import {
 
 import logo from "./logo.png";
 
-import RegisterContractEvent from './RegisterContractEvent'
 
-export default (props) => {
-  // console.log('main props', props)
+export default () => {
 
   return (
   <div className="App">
     <ToastContainer />
-    <RegisterContractEvent {...props}/>
     <div>
       <img src={logo} alt="drizzle-logo" />
       <h1>Drizzle Event Example</h1>
