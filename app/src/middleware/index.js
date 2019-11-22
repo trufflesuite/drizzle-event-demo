@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { generateStore, EventActions } from 'drizzle'
+import { generateStore, EventActions } from '@drizzle/store'
 import drizzleOptions from '../drizzleOptions'
 
 const contractEventNotifier = store => next => action => {
