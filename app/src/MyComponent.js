@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import {
   ContractData,
   ContractForm,
-} from "drizzle-react-components";
+} from "@drizzle/react-components";
 
 import logo from "./logo.png";
 
