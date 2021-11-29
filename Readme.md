@@ -1,1 +1,1 @@
-Repository referenced by [Drizzle and Contract Events tutorial](http://trufflesuite.com/tutorials/drizzle-and-contract-events)
+Repository referenced by [Drizzle and Contract Events tutorial](https://www.trufflesuite.com/guides/drizzle-and-contract-events)
