@@ -14,14 +14,10 @@ const contractEventNotifier = store => next => action => {
   return next(action)
 }
 
-
 const appMiddlewares = [ contractEventNotifier ]
 
-const store = generateStore({
+export default generateStore({
   drizzleOptions,
   appMiddlewares,
   disableReduxDevTools: false  // enable ReduxDevTools!
 })
-
-// Use the store with DrizzleProvider
-export default store
